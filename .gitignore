@@ -72,3 +72,4 @@ Cargo.lock
 #
 
 *.dot
+**/target/

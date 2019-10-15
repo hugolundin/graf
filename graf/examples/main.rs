@@ -7,11 +7,12 @@ fn main() {
     let a = g.add_node(String::from("A"));
     let b = g.add_node(String::from("B"));
     let c = g.add_node(String::from("C"));
+    let d = g.add_node(String::from("D"));
 
-    g.add_edge(a, b, 0);
-    g.add_edge(a, c, 0);
-    g.add_edge(b, c, 0);
+    g.add_edge(a, b, 1);
+    g.add_edge(a, c, 1);
+    g.add_edge(a, d, 1);
 
-    println!("{:#?}", g);
+    // println!("{:#?}", g);
     g.export("test.dot");
 }
