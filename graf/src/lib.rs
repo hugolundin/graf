@@ -67,17 +67,25 @@ impl Graph {
         for node in &self.nodes {
             result += &Graph::draw_node(node);
 
-            if let Some(index) = node.first_outgoing_edge {
-                result += &Graph::extract_edges(
-                    &self,
-                    node,
-                    &self.edges[index]
-                );
+            if let Some(edges) = Graph::draw_edges(&self, node) {
+                result += &edges;
             }
         }
 
         result += "}";
         fs::write(filename, result).expect("Unable to write file");
+    }
+
+    fn draw_edges(&self, node: &Node) -> Option<String> {
+        if let Some(index) = node.first_outgoing_edge {
+            return Some(Graph::extract_edges(
+                /* self = */ &self,
+                /* node = */ node,
+                /* edge = */ &self.edges[index]
+            ));
+        }
+
+        None
     }
 
     fn extract_edges(&self, node: &Node, edge: &Edge) -> String {
